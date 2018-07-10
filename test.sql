@@ -1,5 +1,5 @@
 -- CREATE TABLE users (
---     id VARCHAR(255) NOT NULL,
+--     id string NOT NULL AUTO_INCREMENT,
 --     username VARCHAR(20) NOT NULL,
 --     email VARCHAR(255) NOT NULL,
 --     password VARCHAR(255) NOT NULL,
@@ -11,7 +11,7 @@
 --     id int NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
---     userId VARCHAR(255),
+--     userId string,
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
@@ -23,7 +23,7 @@
 --     id int NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
---     userId VARCHAR(255),
+--     userId string,
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
@@ -35,7 +35,7 @@
 --     id int NOT NULL AUTO_INCREMENT,
 --     vaultId int NOT NULL,
 --     keepId int NOT NULL,
---     userId VARCHAR(255) NOT NULL,
+--     userId string NOT NULL,
 
 --     PRIMARY KEY (id),
 --     INDEX (vaultId, keepId),
@@ -54,7 +54,8 @@
 --         ON DELETE CASCADE
 -- )
 
+
+-- -- USE THIS LINE FOR GET KEEPS BY VAULTID
 -- SELECT * FROM vaultkeeps vk
 -- INNER JOIN keeps k ON k.id = vk.keepId 
 -- WHERE (vaultId = 2)
-
