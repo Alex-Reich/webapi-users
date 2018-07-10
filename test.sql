@@ -1,14 +1,14 @@
--- CREATE TABLE users (
---     id string NOT NULL AUTO_INCREMENT,
---     username VARCHAR(20) NOT NULL,
---     email VARCHAR(255) NOT NULL,
---     password VARCHAR(255) NOT NULL,
---     PRIMARY KEY (id),
---     UNIQUE KEY email (email)
--- );
+CREATE TABLE users (
+    id VARCHAR(255) NOT NULL,
+    username VARCHAR(20) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY email (email)
+);
 
 -- CREATE TABLE vaults (
---     id int NOT NULL AUTO_INCREMENT,
+--     id VARCHAR(255) NOT NULL,
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
 --     userId string,
@@ -20,7 +20,7 @@
 -- );
 
 -- CREATE TABLE keeps (
---     id int NOT NULL AUTO_INCREMENT,
+--     id VARCHAR(255) NOT NULL,
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
 --     userId string,
@@ -32,9 +32,9 @@
 -- );
 
 -- CREATE TABLE vaultkeeps (
---     id int NOT NULL AUTO_INCREMENT,
---     vaultId int NOT NULL,
---     keepId int NOT NULL,
+--     id VARCHAR(255) NOT NULL,
+--     vaultId VARCHAR(255) NOT NULL,
+--     keepId VARCHAR(255) NOT NULL,
 --     userId string NOT NULL,
 
 --     PRIMARY KEY (id),

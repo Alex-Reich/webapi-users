@@ -9,5 +9,8 @@ namespace API_Users.Models
         public string Description {get; set;}
         public string userId {get; set;}
         public bool Pub {get; set;} 
+        public int Views {get; set;}
+        public int Shares {get; set;}
+        public int Keeps {get; set;}
     }
 }
