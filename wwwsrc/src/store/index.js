@@ -23,7 +23,9 @@ var api = axios.create({
 
 export default new vuex.Store({
     state: {
-        user: {}
+        user: {},
+        pins: [],
+        boards: []
     },
     mutations: {
         setUser(state, user){
@@ -40,6 +42,17 @@ export default new vuex.Store({
                 console.log('Successfully logged in')
                 console.log(res.data)
                 commit('setUser', res.data.data)
+            })
+            .catch(err => {
+                console.log("Invalid Credentials")
+            })
+        },
+        authenticate({commit, dispatch}, loginCredentials){
+            auth.get("authenticate").then(res => {
+                commit("setUser", res.data)
+            })
+            .catch(err => {
+                console.log("Invalid Credentials")
             })
         }
     }

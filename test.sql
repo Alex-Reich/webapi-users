@@ -1,17 +1,17 @@
-CREATE TABLE users (
-    id VARCHAR(255) NOT NULL,
-    username VARCHAR(20) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    PRIMARY KEY (id),
-    UNIQUE KEY email (email)
-);
+-- CREATE TABLE users (
+--     id VARCHAR(255) NOT NULL,
+--     username VARCHAR(20) NOT NULL,
+--     email VARCHAR(255) NOT NULL,
+--     password VARCHAR(255) NOT NULL,
+--     PRIMARY KEY (id),
+--     UNIQUE KEY email (email)
+-- );
 
 -- CREATE TABLE vaults (
 --     id VARCHAR(255) NOT NULL,
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
---     userId string,
+--     userId VARCHAR(255),
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
@@ -23,7 +23,7 @@ CREATE TABLE users (
 --     id VARCHAR(255) NOT NULL,
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
---     userId string,
+--     userId VARCHAR(255),
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
@@ -35,7 +35,7 @@ CREATE TABLE users (
 --     id VARCHAR(255) NOT NULL,
 --     vaultId VARCHAR(255) NOT NULL,
 --     keepId VARCHAR(255) NOT NULL,
---     userId string NOT NULL,
+--     userId VARCHAR(255) NOT NULL,
 
 --     PRIMARY KEY (id),
 --     INDEX (vaultId, keepId),
