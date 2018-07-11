@@ -7,8 +7,12 @@
 --     UNIQUE KEY email (email)
 -- );
 
+-- DROP TABLE IF EXISTS vaults;
+-- DROP TABLE IF EXISTS keeps;
+
+
 -- CREATE TABLE vaults (
---     id VARCHAR(255) NOT NULL,
+--     id INT NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
 --     userId VARCHAR(255),
@@ -20,7 +24,7 @@
 -- );
 
 -- CREATE TABLE keeps (
---     id VARCHAR(255) NOT NULL,
+--     id INT NOT NULL AUTO_INCREMENT,
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
 --     userId VARCHAR(255),
@@ -31,28 +35,28 @@
 --     PRIMARY KEY (id)
 -- );
 
--- CREATE TABLE vaultkeeps (
---     id VARCHAR(255) NOT NULL,
---     vaultId VARCHAR(255) NOT NULL,
---     keepId VARCHAR(255) NOT NULL,
---     userId VARCHAR(255) NOT NULL,
+CREATE TABLE vaultkeeps (
+    id INT NOT NULL AUTO_INCREMENT,
+    vaultId INT NOT NULL,
+    keepId INT NOT NULL,
+    userId VARCHAR(255) NOT NULL,
 
---     PRIMARY KEY (id),
---     INDEX (vaultId, keepId),
---     INDEX (userId),
+    PRIMARY KEY (id),
+    INDEX (vaultId, keepId),
+    INDEX (userId),
 
---     FOREIGN KEY (userId)
---         REFERENCES users(id)
---         ON DELETE CASCADE,
+    FOREIGN KEY (userId)
+        REFERENCES users(id)
+        ON DELETE CASCADE,
 
---     FOREIGN KEY (vaultId)
---         REFERENCES vaults(id)
---         ON DELETE CASCADE,
+    FOREIGN KEY (vaultId)
+        REFERENCES vaults(id)
+        ON DELETE CASCADE,
 
---     FOREIGN KEY (keepId)
---         REFERENCES keeps(id)
---         ON DELETE CASCADE
--- )
+    FOREIGN KEY (keepId)
+        REFERENCES keeps(id)
+        ON DELETE CASCADE
+)
 
 
 -- -- USE THIS LINE FOR GET KEEPS BY VAULTID

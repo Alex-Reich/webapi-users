@@ -6,6 +6,8 @@ namespace API_Users.Models
     {
         public string Id {get; set;}
         public string Name {get; set;}
+        public string ImgUrl {get; set;}
+        public string WebLink {get; set;}
         public string Description {get; set;}
         public string UserId {get; set;}
         public bool Public {get; set;} 
