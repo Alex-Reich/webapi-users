@@ -1,0 +1,11 @@
+C:\Users\atrai\Source\CodeWorks\webapi-users\bin\Release\netcoreapp2.0\API_Users.deps.json
+C:\Users\atrai\Source\CodeWorks\webapi-users\bin\Release\netcoreapp2.0\API_Users.runtimeconfig.json
+C:\Users\atrai\Source\CodeWorks\webapi-users\bin\Release\netcoreapp2.0\API_Users.runtimeconfig.dev.json
+C:\Users\atrai\Source\CodeWorks\webapi-users\bin\Release\netcoreapp2.0\API_Users.dll
+C:\Users\atrai\Source\CodeWorks\webapi-users\bin\Release\netcoreapp2.0\API_Users.pdb
+C:\Users\atrai\Source\CodeWorks\webapi-users\obj\Release\netcoreapp2.0\API_Users.csprojAssemblyReference.cache
+C:\Users\atrai\Source\CodeWorks\webapi-users\obj\Release\netcoreapp2.0\API_Users.csproj.CoreCompileInputs.cache
+C:\Users\atrai\Source\CodeWorks\webapi-users\obj\Release\netcoreapp2.0\API_Users.AssemblyInfoInputs.cache
+C:\Users\atrai\Source\CodeWorks\webapi-users\obj\Release\netcoreapp2.0\API_Users.AssemblyInfo.cs
+C:\Users\atrai\Source\CodeWorks\webapi-users\obj\Release\netcoreapp2.0\API_Users.dll
+C:\Users\atrai\Source\CodeWorks\webapi-users\obj\Release\netcoreapp2.0\API_Users.pdb
