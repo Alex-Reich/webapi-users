@@ -4,4 +4,4 @@ WORKDIR /app
 
 COPY . .
 
-CMD ASPNETCORE_URLS=http://*:$PORT dotnet webapi-users.dll
+CMD ASPNETCORE_URLS=http://*:$PORT dotnet API_Users.dll
