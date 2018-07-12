@@ -5,7 +5,7 @@ import router from '../router'
 
 
 var production = !window.location.host.includes('localhost');
-var baseUrl = production ? '' : '//localhost:3000/';
+var baseUrl = production ? '' : '//localhost:5000/';
 
 
 vue.use(vuex)
@@ -14,46 +14,61 @@ var api = axios.create({
     baseURL: baseUrl,
     timeout: 3000,
     withCredentials: true
-  })
-  var auth = axios.create({
+})
+var auth = axios.create({
     baseURL: baseUrl + 'auth/',
     timeout: 3000,
     withCredentials: true
-  })
+})
 
 export default new vuex.Store({
     state: {
-        user: {},
-        pins: [],
-        boards: []
+        user: {}
     },
     mutations: {
-        setUser(state, user){
+        setUser(state, user) {
             state.user = user
         },
-        deleteUser(state){
+        deleteUser(state) {
             state.user = {}
         }
     },
     actions: {
-        login({commit}, loginCredentials){
-            auth.post('login', loginCredentials)
-            .then(res => {
-                console.log('Successfully logged in')
-                console.log(res.data)
-                commit('setUser', res.data.data)
-            })
-            .catch(err => {
-                console.log("Invalid Credentials")
-            })
+        login({ commit }, loginCredentials) {
+            auth.post('account/login', loginCredentials)
+                .then(res => {
+                    console.log('Successfully logged in')
+                    console.log(res.data)
+                    commit('setUser', res.data.data)
+                })
+                .catch(err => {
+                    console.log("Invalid Credentials")
+                })
         },
-        authenticate({commit, dispatch}, loginCredentials){
-            auth.get("authenticate").then(res => {
+        logout({ commit }) {
+            auth.delete('account/logout')
+                .then(res => {
+                    commit('deleteUser')
+                    router.push({ name: 'Home' })
+                })
+        },
+        register({ commit }, userData) {
+            console.log(userData)
+            auth.post('account/register', userData)
+                .then(res => {
+                    commit('setUser', res.data)
+                    router.push({ name: 'UserProfile' })
+                })
+        },
+        authenticate({ commit, dispatch }, loginCredentials) {
+            auth.get("account/authenticate").then(res => {
                 commit("setUser", res.data)
             })
-            .catch(err => {
-                console.log("Invalid Credentials")
-            })
+                .catch(err => {
+                    console.log("Invalid Credentials")
+                })
         }
+
+
     }
 })  

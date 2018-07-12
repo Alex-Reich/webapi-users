@@ -14,8 +14,8 @@
           <div class="modal-body">
             <form v-on:submit.prevent="userLogin">
               <div class="form-group">
-                <input type="text" name="userUsername" v-model="
-                      login.username" class="form-control" id="formGroupExampleInput" placeholder="Username" required>
+                <input type="text" name="email" v-model="
+                      login.email" class="form-control" id="formGroupExampleInput" placeholder="Email" required>
               </div>
               <div class="form-group">
                 <input type="text" name="password" v-model="
@@ -47,7 +47,7 @@
                   required>
               </div>
               <div class="form-group">
-                <input type="text" name="email" v-model="register.email" class="form-control" id="formGroupExampleInput" placeholder="email">
+                <input type="text" name="email" v-model="register.email" class="form-control" id="formGroupExampleInput" placeholder="Email">
               </div>
               <div class="form-group">
                 <input type="text" name="password" v-model="register.password" class="form-control" id="formGroupExampleInput" placeholder="Password">
@@ -64,13 +64,17 @@
 </template>
 
 <script>
-
+import router from '../router'
+import userProfile from './UserProfile'
   export default {
-    name: 'HelloWorld',
+    name: 'Home',
+    components: {
+      userProfile
+    },
     data() {
       return {
         login: {
-          username: '',
+          email: '',
           password: ''
         },
         register: {

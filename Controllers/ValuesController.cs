@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Users.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {

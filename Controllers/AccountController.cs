@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API_Users.Controllers
 {
-    [Route("[controller]")]
+    [Route("auth/[controller]")]
     public class AccountController : Controller
     {
         private readonly UserRepository _db;
