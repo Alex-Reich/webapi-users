@@ -16,7 +16,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form v-on:submit.prevent="createKeep">
+                                <form v-on:submit.prevent="createKeep(newKeep)">
                                     <div class="form-group">
                                         <input v-model="newKeep.name" value="newKeep.name" type="text" name="keepName" placeholder="Keep Name" required>
                                         <input v-model="newKeep.img" value="newKeep.img" type="url" name="keepImg" placeholder="Image Url">
@@ -28,6 +28,9 @@
                                             <option disabled value="">Select a Vault</option>
                                             <option v-for="vault in vaults" :key="vault.id" value="newKeep.vaultId">{{vault.name}}</option>
                                         </select>
+                                    </div>
+                                    <div class="modal-footer">
+                                            <button type="button" @click="createKeep(newKeep)" class="btn btn2" data-dismiss="modal">Save</button>
                                     </div>
                                 </form>
                             </div>
@@ -72,8 +75,9 @@
                 this.$store.dispatch('logout')
                 this.$store.state.loggedIn = false
             },
-            createKeep() {
-                this.$store.dispatch('createKeep')
+            createKeep(newKeep) {
+                console.log(newKeep)
+                this.$store.dispatch('createKeep', newKeep)
             }
         }
     }

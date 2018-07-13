@@ -9,6 +9,7 @@
 
 -- DROP TABLE IF EXISTS vaults;
 -- DROP TABLE IF EXISTS keeps;
+-- DROP TABLE IF EXISTS vaultkeeps;
 
 
 -- CREATE TABLE vaults (
@@ -28,6 +29,7 @@
 --     name VARCHAR(20) NOT NULL,
 --     description VARCHAR(255) NOT NULL,
 --     userId VARCHAR(255),
+--     public TINYINT, 
 --     INDEX userId (userId),
 --     FOREIGN KEY (userId)
 --         REFERENCES users(id)
@@ -63,3 +65,6 @@
 -- SELECT * FROM vaultkeeps vk
 -- INNER JOIN keeps k ON k.id = vk.keepId 
 -- WHERE (vaultId = 2)
+
+
+

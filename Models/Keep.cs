@@ -9,9 +9,14 @@ namespace API_Users.Models
         public string Img {get; set;}
         public string Description {get; set;}
         public string UserId {get; set;}
-        public bool Public {get; set;} 
+        public int Public {get; set;}
         public int Views {get; set;}
         public int Shares {get; set;}
         public int Saves {get; set;}
+
+        public Keep()
+        {
+           Public = 1; 
+        }
     }
 }

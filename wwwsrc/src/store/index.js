@@ -2,6 +2,8 @@ import vue from 'vue'
 import vuex from 'vuex'
 import axios from 'axios'
 import router from '../router'
+import { ESRCH } from 'constants';
+import { debug } from 'util';
 
 
 var production = !window.location.host.includes('localhost');
@@ -25,8 +27,10 @@ export default new vuex.Store({
     state: {
         user: {},
         loggedIn: false,
+        keeps: [],
+        userKeeps: [],
         vaults: [],
-        activeVault:{}
+        activeVault: {}
 
     },
     mutations: {
@@ -36,15 +40,24 @@ export default new vuex.Store({
         deleteUser(state) {
             state.user = {}
         },
-        setVaults(state, vaults){
+        setVaults(state, vaults) {
             state.vaults = vaults
         },
         setNewVault(state, vault) {
             state.vaults.unshift(vault)
-          },
+        },
         setActiveVault(state, vault) {
             state.activeVault = vault
-          }
+        },
+        setKeeps(state, keeps) {
+            state.keeps = keeps
+        },
+        setUserKeeps(state, keeps) {
+            state.userKeeps = keeps
+        },
+        setNewKeep(state, keep) {
+            state.userKeeps.unshift(keep)
+        },
     },
     actions: {
         login({ commit }, loginCredentials) {
@@ -79,6 +92,25 @@ export default new vuex.Store({
             })
                 .catch(err => {
                     console.log("Invalid Credentials")
+                })
+        },
+        getKeeps({commit, dispatch, }) {
+            api.get("api/keep")
+            .then(res => {
+                debugger
+                commit("setKeeps", res.data)
+            })
+            .catch(err =>{
+                console.log(err)
+            })
+        },
+        createKeep({ commit, dispatch }, keep) {
+            api.post("api/keep/", keep)
+                .then(res => {
+                    commit("setKeeps", res.data)
+                })
+                .catch(err => {
+                    console.log("Error creating keep")
                 })
         }
 

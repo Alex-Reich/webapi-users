@@ -62,9 +62,9 @@
       </div>
 
     </div>
-        <div v-if="loggedIn">
-          <UserProfile></UserProfile>
-        </div>
+    <div v-if="loggedIn">
+      <UserProfile></UserProfile>
+    </div>
     <div>
       <Keep></Keep>
     </div>
@@ -99,7 +99,7 @@
       if (!this.$store.state.user._id) {
         this.$store.dispatch('authenticate')
       }
-      // this.$store.dispatch('getAllKeeps')
+      this.$store.dispatch("getKeeps")
     },
     computed: {
       loggedIn() {
