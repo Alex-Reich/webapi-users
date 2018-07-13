@@ -23,7 +23,11 @@ var auth = axios.create({
 
 export default new vuex.Store({
     state: {
-        user: {}
+        user: {},
+        loggedIn: false,
+        vaults: [],
+        activeVault:{}
+
     },
     mutations: {
         setUser(state, user) {
@@ -31,7 +35,16 @@ export default new vuex.Store({
         },
         deleteUser(state) {
             state.user = {}
-        }
+        },
+        setVaults(state, vaults){
+            state.vaults = vaults
+        },
+        setNewVault(state, vault) {
+            state.vaults.unshift(vault)
+          },
+        setActiveVault(state, vault) {
+            state.activeVault = vault
+          }
     },
     actions: {
         login({ commit }, loginCredentials) {
@@ -39,7 +52,7 @@ export default new vuex.Store({
                 .then(res => {
                     console.log('Successfully logged in')
                     console.log(res.data)
-                    commit('setUser', res.data.data)
+                    commit('setUser', res.data)
                 })
                 .catch(err => {
                     console.log("Invalid Credentials")
@@ -57,7 +70,7 @@ export default new vuex.Store({
             auth.post('account/register', userData)
                 .then(res => {
                     commit('setUser', res.data)
-                    router.push({ name: 'UserProfile' })
+                    // router.push({ name: 'UserProfile' })
                 })
         },
         authenticate({ commit, dispatch }, loginCredentials) {

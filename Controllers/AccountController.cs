@@ -51,6 +51,16 @@ namespace API_Users.Controllers
             }
             return null;
         }
+
+        [HttpDelete("logout")]
+        public async Task<string> Logout()
+        {
+            {
+                await HttpContext.SignOutAsync();
+                return "Successfully logged out";
+            }
+        }
+
         [HttpGet("authenticate")]
         public UserReturnModel Authenticate()
         {
