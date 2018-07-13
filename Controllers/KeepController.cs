@@ -51,7 +51,17 @@ namespace API_Users.Controllers
         {
             return _db.EditKeep(id, newKeep);
         }
-
+        // [HttpDelete("{id")]
+        // [Authorize]
+        // public string DeleteKeep(string id)
+        // {
+        //     var user = HttpContext.User.Identity.Name;
+        //     bool delete = _db.DeleteKeep(id, user);
+        //     if(delete){
+        //         return "Successfully Deleted User";
+        //     }
+        //     return "Deletion Failed";
+        // }
 
     }
 }
