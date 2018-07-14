@@ -97,7 +97,6 @@ export default new vuex.Store({
         getKeeps({commit, dispatch, }) {
             api.get("api/keep")
             .then(res => {
-                debugger
                 commit("setKeeps", res.data)
             })
             .catch(err =>{

@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h1>Welcome to Keepr</h1>
-    <div v-if="!loggedIn">
+    <div v-if="!user.id">
       <button type="button" class="btn btn1 mt-1 btnwidth2 mr-4" data-toggle="modal" data-target="#loginModal">Login</button>
       <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -62,7 +62,7 @@
       </div>
 
     </div>
-    <div v-if="loggedIn">
+    <div v-if="user.id">
       <UserProfile></UserProfile>
     </div>
     <div>
@@ -102,14 +102,13 @@
       this.$store.dispatch("getKeeps")
     },
     computed: {
-      loggedIn() {
-        return this.$store.state.loggedIn
+      user() {
+        return this.$store.state.user
       }
     },
     methods: {
       userLogin() {
         this.$store.dispatch('login', this.login)
-        this.$store.state.loggedIn = true
       },
       userRegister() {
         this.$store.dispatch('register', this.register)
