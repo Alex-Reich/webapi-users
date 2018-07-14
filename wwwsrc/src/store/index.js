@@ -26,7 +26,6 @@ var auth = axios.create({
 export default new vuex.Store({
     state: {
         user: {},
-        loggedIn: false,
         keeps: [],
         userKeeps: [],
         vaults: [],
