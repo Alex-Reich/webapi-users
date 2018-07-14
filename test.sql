@@ -11,6 +11,8 @@
 -- DROP TABLE IF EXISTS keeps;
 -- DROP TABLE IF EXISTS vaultkeeps;
 
+-- DELETE FROM keeps;
+
 
 -- CREATE TABLE vaults (
 --     id INT NOT NULL AUTO_INCREMENT,

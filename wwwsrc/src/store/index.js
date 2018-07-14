@@ -105,7 +105,7 @@ export default new vuex.Store({
         createKeep({ commit, dispatch }, keep) {
             api.post("api/keep/", keep)
                 .then(res => {
-                    commit("setKeeps", res.data)
+                    commit("setNewKeep", res.data)
                 })
                 .catch(err => {
                     console.log("Error creating keep")

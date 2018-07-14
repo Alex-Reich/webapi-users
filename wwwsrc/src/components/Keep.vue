@@ -1,6 +1,7 @@
 <template>
     <div >
-        <div v-for="keep in keeps" :key="keep.id" :value="vault" class="card text-center">
+        <div v-for="keep in keeps" :key="keep.id" class="card text-center">
+            <h3 class="card-title">{{keep.name}}</h3>
             <div class="container">
                 <img :src="keep.img" alt="">
                 <div class="buttons">
@@ -8,8 +9,8 @@
                     <button class="btn" @click="addtoVault(keep)">Add to Vault </button>
                 </div>
             </div>
-            <h3 class="card-title">{{keep.name}}</h3>
             <h3 class="card-text">Description: {{keep.description}}</h3>
+            <h3 class="card-text">Views: {{keep.views}} Saves: {{keep.saves}}</h3>
         </div>
     </div>
 </template>
@@ -19,10 +20,12 @@
         name: 'Keep',
         data() {
             return {
-
+                
             }
         },
-        mounted() {},
+        mounted() {
+            this.$store.dispatch('getKeeps')
+        },
         computed: {
             user() {
                 return this.$store.state.user
