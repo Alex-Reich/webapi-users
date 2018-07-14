@@ -65,7 +65,7 @@
     <div v-if="user.id">
       <UserProfile></UserProfile>
     </div>
-    <div>
+    <div v-if="showKeeps == 1">
       <Keep></Keep>
     </div>
 
@@ -92,13 +92,14 @@
           username: '',
           email: '',
           password: '',
-        }
+        },
+        showKeeps: 1
       }
     },
     mounted() {
-      if (!this.$store.state.user._id) {
-        this.$store.dispatch('authenticate')
-      }
+      // if (!this.$store.state.user._id) {
+      //   this.$store.dispatch('authenticate')
+      // }
       this.$store.dispatch("getKeeps")
     },
     computed: {
@@ -115,6 +116,10 @@
       },
       getKeeps() {
         this.$store.dispatch('getKeeps', this.search)
+      },
+      viewKeeps() {
+        showKeeps = 1
+        showVaults = 0
       }
     }
   }

@@ -43,8 +43,14 @@ namespace API_Users.Repositories
       keep.Id = id;
       var i = _db.Execute(@"
                 UPDATE keeps SET
-                    title = @Title,
-                    body = @Body
+                    name = @Name,
+                    description = @Description,
+                    img = @img,
+                    userId = @UserId,
+                    public = @Public,
+                    views = @Views,
+                    shares = @Shares,
+                    saves = @Saves
                 WHERE id = @Id
             ", keep);
       if (i > 0)
