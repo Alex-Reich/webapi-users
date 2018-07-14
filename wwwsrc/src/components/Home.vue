@@ -65,10 +65,6 @@
     <div v-if="user.id">
       <UserProfile></UserProfile>
     </div>
-    <div v-if="showKeeps == 1">
-      <Keep></Keep>
-    </div>
-
   </div>
 </template>
 
@@ -92,20 +88,38 @@
           username: '',
           email: '',
           password: '',
-        },
-        showKeeps: 1
+        }
       }
     },
     mounted() {
-      // if (!this.$store.state.user._id) {
-      //   this.$store.dispatch('authenticate')
-      // }
       this.$store.dispatch("getKeeps")
     },
     computed: {
       user() {
         return this.$store.state.user
       }
+      // viewingKeeps: {
+      //   get: function () {
+      //     return this.$store.state.viewingKeeps
+      //     return this.$store.state.viewingVaults
+      //   },
+      //   set: function () {
+      //     this.$store.state.viewingKeeps = 1,
+      //     this.$store.state.viewingVaults = 0
+      //     console.log(viewingKeeps)
+      //   }
+      // },
+      // viewingVaults: {
+      //   get: function () {
+      //     return this.$store.state.viewingKeeps
+      //     return this.$store.state.viewingVaults
+      //   },
+      //   set: function () {
+      //     this.$store.state.viewingKeeps = 0,
+      //     this.$store.state.viewingVaults = 1
+      //     console.log(viewingKeeps)
+      //   }
+      // }
     },
     methods: {
       userLogin() {
@@ -116,10 +130,6 @@
       },
       getKeeps() {
         this.$store.dispatch('getKeeps', this.search)
-      },
-      viewKeeps() {
-        showKeeps = 1
-        showVaults = 0
       }
     }
   }

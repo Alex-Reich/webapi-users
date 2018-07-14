@@ -25,6 +25,11 @@
                         </button>
                     </div>
                     <div class="modal-body">
+                        <div class="container">
+                            <img :src="keep.img" alt="">
+                            <h3 class="card-text">Description: {{keep.description}}</h3>
+                            <h3 class="card-text">Views: {{keep.views}} Saves: {{keep.saves}}</h3>
+                         </div>
                         <select v-model="keep.vaultId">
                             <option disabled value="">Select a Vault</option>
                             <option v-for="vault in vaults" :key="vault.id" value="keep.vaultId">{{vault.name}}</option>
@@ -47,7 +52,7 @@
         data() {
             return {
                 keep: {
-                    vaultId: ''                 
+                    vaultId: ''
                 }
             }
         },
@@ -81,8 +86,8 @@
                 console.log(keep)
 
             },
-            addView(keep){
-                keep.views ++
+            addView(keep) {
+                keep.views++
                 this.$store.dispatch('updateKeep', keep)
             }
         }
