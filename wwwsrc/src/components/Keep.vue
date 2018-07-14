@@ -41,7 +41,11 @@
             }
         },
         methods: {
-            
+            // viewKeep needs to router.push to a component that contains info for a single keep.
+            // Need to create this component and add it to routes
+            // On this page the single keep will be displayed
+            // Orrrrrrrr
+            // Have the view button open up a modal with the single keep. Can add to vault from this modal. Button will ++ view count for that keep
         }
     }
 
