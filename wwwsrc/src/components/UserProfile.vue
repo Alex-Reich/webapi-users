@@ -4,8 +4,12 @@
             <div class="profIcon d-flex">
                 <button class="btn btn-dark mr-auto rnd" data-toggle="modal" data-target="#createKeepModal">Create Keep</button>
                 <button class="btn btn-dark rnd m-auto" data-toggle="modal" data-target="#createVaultModal">Create Vault</button>
-                <button class="btn btn-dark rnd m-auto" @click="viewToggle()">My Keeps/Vaults</button>
-                <div v-if=""></div>
+                <div v-if="toggleView">
+                    <button class="btn btn-dark rnd m-auto" @click="viewToggle()">My Keeps</button>
+                </div>
+                <div v-if="!toggleView">
+                    <button class="btn btn-dark rnd m-auto" @click="viewToggle()">My Vaults</button>
+                </div>
                 <button class="btn btn-dark ml-auto rnd" @click=logout()>Logout</button>
 
                 <!-- create keep modal -->
@@ -29,7 +33,7 @@
                                     <div class="form-group">
                                         <select v-model="newKeep.vaultId">
                                             <option disabled value="">Select a Vault</option>
-                                            <option v-for="vault in vaults" :key="vault.id" value="newKeep.vaultId">{{vault.name}}</option>
+                                            <option v-for="vault in userVaults" :key="vault.id" value="newKeep.vaultId">{{vault.name}}</option>
                                         </select>
                                     </div>
                                     <div class="modal-footer">
@@ -91,10 +95,12 @@
 <script>
     import router from '../router'
     import Keep from './Keep'
+    import Vault from './Vault'
     export default {
         name: 'UserProfile',
         components: {
-            Keep
+            Keep,
+            Vault
         },
         data() {
             return {
@@ -116,13 +122,14 @@
             if (!this.$store.state.user._id) {
                 router.push({ name: 'Home' })
             }
+            this.$store.dispatch('getUserVaults', this.user)
         },
         computed: {
             user() {
                 return this.$store.state.user;
             },
-            vaults() {
-                return this.$store.state.vaults;
+            userVaults() {
+                return this.$store.state.userVaults;
             }
         },
         methods: {
@@ -140,6 +147,7 @@
                 this.$store.dispatch('createVault', newVault)
             },
             viewToggle() {
+                console.log(this.$store.state.userVaults)
                 this.toggleView = !this.toggleView
             }
         }

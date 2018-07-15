@@ -56,14 +56,6 @@ export default new vuex.Store({
         },
         setNewKeep(state, keep) {
             state.userKeeps.unshift(keep)
-        },
-        setViewKeeps(state) {
-            state.viewingKeeps = 1,
-            state.viewingVaults = 0
-        },
-        setViewVaults(state) {
-            state.viewingKeeps = 0,
-            state.viewingVaults = 1
         }
     },
     actions: {
@@ -101,7 +93,7 @@ export default new vuex.Store({
                     console.log("Invalid Credentials")
                 })
         },
-        getKeeps({commit, dispatch, }) {
+        getKeeps({commit, dispatch }) {
             api.get("api/keep")
             .then(res => {
                 commit("setKeeps", res.data)
@@ -131,16 +123,16 @@ export default new vuex.Store({
         createVault({commit, dispatch}, vault) {
             api.post("api/vault/", vault)
             .then(res =>{
-                dispatch("setNewVault", res.data)
+                commit("setNewVault", res.data)
             })
             .catch(err =>{
                 console.log(err)
             })
         },
-        getUserVaults({commit, dispatch}) {
-            api.get("api/vault/user/id")
+        getUserVaults({commit, dispatch}, user) {
+            api.get("api/vault/user/" + user.id)
             .then(res => {
-                commit("setVaults", res.data)
+                commit("setUserVaults", res.data)
             })
             .catch(err =>{
                 console.log(err)
