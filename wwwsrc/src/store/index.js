@@ -56,7 +56,19 @@ export default new vuex.Store({
         },
         setNewKeep(state, keep) {
             state.userKeeps.unshift(keep)
-        }
+        },
+        deleteVault(state, vault) {
+            var i = state.userVaults.findIndex(v => {
+                return v.id == vault.id
+            })
+            state.userVaults.splice(i, 1)
+        },
+        deleteKeep(state, keep) {
+            var i = state.keeps.findIndex(k => {
+                return k.id == keep.id
+            })
+            state.keeps.splice(i, 1)
+        },
     },
     actions: {
         login({ commit }, loginCredentials) {
@@ -93,14 +105,14 @@ export default new vuex.Store({
                     console.log("Invalid Credentials")
                 })
         },
-        getKeeps({commit, dispatch }) {
+        getKeeps({ commit, dispatch }) {
             api.get("api/keep")
-            .then(res => {
-                commit("setKeeps", res.data)
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+                .then(res => {
+                    commit("setKeeps", res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         },
         createKeep({ commit, dispatch }, keep) {
             api.post("api/keep/", keep)
@@ -111,34 +123,52 @@ export default new vuex.Store({
                     console.log("Error creating keep")
                 })
         },
-        updateKeep({commit, dispatch}, keep) {
+        updateKeep({ commit, dispatch }, keep) {
             api.put("api/keep/" + keep.id, keep)
-            .then(res =>{
-                dispatch("getKeeps")
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+                .then(res => {
+                    dispatch("getKeeps")
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         },
-        createVault({commit, dispatch}, vault) {
+        createVault({ commit, dispatch }, vault) {
             api.post("api/vault/", vault)
-            .then(res =>{
-                commit("setNewVault", res.data)
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+                .then(res => {
+                    commit("setNewVault", res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
         },
-        getUserVaults({commit, dispatch}, user) {
+        getUserVaults({ commit, dispatch }, user) {
             api.get("api/vault/user/" + user.id)
-            .then(res => {
-                commit("setUserVaults", res.data)
-            })
-            .catch(err =>{
-                console.log(err)
-            })
+                .then(res => {
+                    commit("setUserVaults", res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        deleteVault({ commit, dispatch }, vault) {
+            api.delete('api/vault/' + vault.id)
+                .then(res => {
+                    commit("deleteVault", res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
+        },
+        deleteKeep({ commit, dispatch }, keep) {
+            api.delete('/keep/' + keep.id)
+                .then(res => {
+                    commit("deleteKeep", res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+
         }
-
-
     }
 })  

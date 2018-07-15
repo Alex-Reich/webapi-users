@@ -56,13 +56,14 @@ namespace API_Users.Repositories
             return null;
         }
         // Delete
-        public bool DeleteVault(string id)
+        public bool DeleteVault(int id, string userId)
         {
             var i = _db.Execute(@"
       DELETE FROM vaults
       WHERE id = @id
+      AND userId = @userId
       LIMIT 1;
-      ", new { id });
+      ", new { id, userId });
             if (i > 0)
             {
                 return true;

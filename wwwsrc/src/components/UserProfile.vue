@@ -5,10 +5,10 @@
                 <button class="btn btn-dark mr-auto rnd" data-toggle="modal" data-target="#createKeepModal">Create Keep</button>
                 <button class="btn btn-dark rnd m-auto" data-toggle="modal" data-target="#createVaultModal">Create Vault</button>
                 <div v-if="toggleView">
-                    <button class="btn btn-dark rnd m-auto" @click="viewToggle()">My Keeps</button>
+                    <button class="btn btn-dark rnd m-auto" @click="viewToggle()">My Vaults</button>
                 </div>
                 <div v-if="!toggleView">
-                    <button class="btn btn-dark rnd m-auto" @click="viewToggle()">My Vaults</button>
+                        <button class="btn btn-dark rnd m-auto" @click="viewToggle()">My Keeps</button>
                 </div>
                 <button class="btn btn-dark ml-auto rnd" @click=logout()>Logout</button>
 

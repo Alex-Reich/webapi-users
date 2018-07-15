@@ -60,13 +60,14 @@ namespace API_Users.Repositories
       return null;
     }
     // Delete
-    public bool DeleteKeep(string id)
+    public bool DeleteKeep(int id, string userId)
     {
       var i = _db.Execute(@"
       DELETE FROM keeps
       WHERE id = @id
+      AND userId = @userId
       LIMIT 1;
-      ", new { id });
+      ", new { id, userId });
       if (i > 0)
       {
         return true;
