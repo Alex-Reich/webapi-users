@@ -47,18 +47,24 @@ namespace API_Users.Controllers
         //edit keep
         [HttpPut("{id}")]
         [Authorize]
-        public Keep EditKeep(string id, [FromBody]Keep newKeep)
+        public Keep EditKeep(string id, [FromBody]Keep editKeep)
         {
-            return _db.EditKeep(id, newKeep);
+            if (ModelState.IsValid)
+            {
+                var user = HttpContext.User.Identity.Name;
+                return _db.EditKeep(id, editKeep, user);
+            }
+            return null;
         }
-        
+
         [HttpDelete("{id}")]
         [Authorize]
         public string DeleteKeep(int id)
         {
             var user = HttpContext.User.Identity.Name;
             bool delete = _db.DeleteKeep(id, user);
-            if(delete){
+            if (delete)
+            {
                 return "Successfully Deleted User";
             }
             return "Deletion Failed";

@@ -28,7 +28,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form v-on:submit.prevent="updateKeep">
+                        <form v-on:submit.prevent="updateKeep(viewKeep)">
                             <div class="modal-body">
                                 <div class="container">
                                     <img :src="viewKeep.img" alt="">
@@ -51,7 +51,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary btn-primary" @click="updateKeep" data-dismiss="modal">Save</button>
+                                <button class="btn btn-primary btn-primary" @click="updateKeep(viewKeep)" data-dismiss="modal">Save</button>
                             </div>
                         </form>
                     </div>
@@ -93,11 +93,12 @@
             }
         },
         methods: {
-            updateKeep(keep) {
-                keep.shares++
-                keep.public = this.updatedKeep.public
-                this.$store.dispatch('updateKeep', keep)
-                console.log("Keep updated", keep)
+            updateKeep(viewKeep) {
+                console.log(viewKeep)
+                this.viewKeep.shares++
+                viewKeep.public = this.updatedKeep.public
+                this.$store.dispatch('updateKeep', viewKeep)
+                console.log("Keep updated", viewKeep)
             },
             addView(keep) {
                 keep.views++

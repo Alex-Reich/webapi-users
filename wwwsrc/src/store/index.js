@@ -142,8 +142,10 @@ export default new vuex.Store({
                 })
         },
         updateKeep({ commit, dispatch }, keep) {
+            console.log(keep)
             api.put("api/keep/" + keep.id, keep)
                 .then(res => {
+                    console.log(res.data)
                     dispatch("getKeeps")
                 })
                 .catch(err => {

@@ -2,12 +2,11 @@
     <div class="container">
         <div>
 
-            <div v-for="keep in keeps" :key="keep.id" class="card text-center">
+            <div v-for="keep in keeps" v-if :key="keep.id" class="card text-center">
                 <h3 class="card-title">{{keep.id}}. {{keep.name}}</h3>
                 <div class="container">
                     <img :src="keep.img" alt="">
                     <div class="buttons">
-                        <!-- <button class="btn" data-toggle="modal" data-target="#viewingKeepModal" @click="addView(keep)">View</button> -->
                         <button class="btn inPic" @click="addView(keep)">View</button>
                         <div v-if="user.id == keep.userId">
                             <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>

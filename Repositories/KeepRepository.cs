@@ -38,9 +38,9 @@ namespace API_Users.Repositories
       return _db.QueryFirstOrDefault<Keep>("SELECT * FROM keeps WHERE id = @id;", new { id });
     }
     // Edit
-    public Keep EditKeep(string id, Keep keep)
+    public Keep EditKeep(string id, Keep editKeep, string user)
     {
-      keep.Id = id;
+      editKeep.Id = id;
       var i = _db.Execute(@"
                 UPDATE keeps SET
                     name = @Name,
@@ -52,10 +52,10 @@ namespace API_Users.Repositories
                     shares = @Shares,
                     saves = @Saves
                 WHERE id = @Id
-            ", keep);
+            ", editKeep);
       if (i > 0)
       {
-        return keep;
+        return editKeep;
       }
       return null;
     }
