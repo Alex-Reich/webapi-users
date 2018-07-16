@@ -25,11 +25,7 @@ var auth = axios.create({
 
 export default new vuex.Store({
     state: {
-        user: {
-            username: '',
-            id: '',
-            email: ''
-        },
+        user: {},
         keeps: [],
         userKeeps: [],
         userVaults: [],
@@ -38,11 +34,7 @@ export default new vuex.Store({
     },
     mutations: {
         setUser(state, user) {
-            state.user = {
-                username: user.username,
-                id: user.id,
-                email: user.email
-            }
+            state.user = user
         },
         deleteUser(state) {
             state.user = {
@@ -87,7 +79,7 @@ export default new vuex.Store({
             auth.post('account/login', user)
                 .then(res => {
                     console.log('Successfully logged in')
-                    console.log(res.data)
+                    // console.log(res.data)
                     commit('setUser', res.data)
                 })
                 .catch(err => {
@@ -97,7 +89,7 @@ export default new vuex.Store({
         logout({ commit, dispatch, state }) {
             auth.delete('account/' + state.user.id)
                 .then(res => {
-                    commit('deleteUser')
+                    commit('setUser', {})
                     router.push({ name: 'Home' })
                 })
         },
@@ -108,9 +100,14 @@ export default new vuex.Store({
                     commit('setUser', res.data)
                     // router.push({ name: 'UserProfile' })
                 })
+                .catch(res => {
+                    console.log(res)
+                })
         },
         authenticate({ commit, dispatch }, loginCredentials) {
-            auth.get("account/authenticate").then(res => {
+            auth.get("account/authenticate")
+            .then(res => {
+                console.log(res.data)
                 commit("setUser", res.data)
             })
                 .catch(err => {

@@ -5,10 +5,10 @@
                 <button class="btn btn-dark mr-auto rnd" data-toggle="modal" data-target="#createKeepModal">Create Keep</button>
                 <button class="btn btn-dark rnd m-auto" data-toggle="modal" data-target="#createVaultModal">Create Vault</button>
                 <div v-if="toggleView">
-                    <button class="btn btn-dark rnd m-auto" @click="viewToggle()">My Vaults</button>
+                    <button class="btn btn-dark rnd m-auto" @click="viewToggle()">Switch to My Vaults</button>
                 </div>
                 <div v-if="!toggleView">
-                        <button class="btn btn-dark rnd m-auto" @click="viewToggle()">My Keeps</button>
+                        <button class="btn btn-dark rnd m-auto" @click="viewToggle()">Switch to My Keeps</button>
                 </div>
                 <button class="btn btn-dark ml-auto rnd" @click=logout()>Logout</button>
 
@@ -81,9 +81,18 @@
             </div>
             <h2 class="">Hello {{user.username}}</h2>
         </div>
-        <div v-if="toggleView">
-            <h4>You are currently viewing your Keeps</h4>
-            <keep></keep>
+        <div>
+            <div v-if="toggleView" class="row">
+                <div class="col">
+                    <h4>You are viewing all public keeps</h4>
+                    <keep></keep>
+                </div>
+                <div class="col">
+                    <h4>You are currently viewing your Keeps</h4>
+                    <MyKeeps></MyKeeps>
+                </div>
+
+            </div>
         </div>
         <div v-if="!toggleView">
             <h4>You are currently viewing your Vaults</h4>
@@ -96,11 +105,13 @@
     import router from '../router'
     import Keep from './Keep'
     import Vault from './Vault'
+    import MyKeeps from './MyKeeps'
     export default {
         name: 'UserProfile',
         components: {
             Keep,
-            Vault
+            Vault,
+            MyKeeps
         },
         data() {
             return {
@@ -119,7 +130,7 @@
             }
         },
         mounted() {
-            if (!this.$store.state.user._id) {
+            if (!this.$store.state.user.id) {
                 router.push({ name: 'Home' })
             }
             this.$store.dispatch('getUserVaults', this.user)
@@ -130,6 +141,9 @@
             },
             userVaults() {
                 return this.$store.state.userVaults;
+            },
+            keeps() {
+                return this.$store.state.keeps
             }
         },
         methods: {

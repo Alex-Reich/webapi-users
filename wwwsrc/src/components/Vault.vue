@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div v-for="vault in userVaults" :key="vault.id" class="card text-center">
+    <div v-for="vault in userVaults" v-if="vault.userId == user.id" :key="vault.id" class="card text-center">
       <h3 class="card-title">{{vault.id}}. {{vault.name}}</h3>
       <h3 class="card-text">Description: {{vault.description}}</h3>
       <button class="btn btn-danger" @click="deleteVault(vault)">Delete</button>
@@ -12,7 +12,6 @@
             <img :src="keep.img" alt="">
             <div class="buttons">
               <button class="btn" data-toggle="modal" data-target="#viewingKeepModal" @click="addView(keep)">View</button>
-              <button class="btn" @click="addToVault(keep)">Add to Vault </button>
               <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
             </div>
           </div>
@@ -67,7 +66,7 @@
     },
     mounted() {
       this.$store.dispatch('getUserVaults', this.user)
-
+      console.log(this.user)
     },
     computed: {
       user() {

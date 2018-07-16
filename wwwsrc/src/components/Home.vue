@@ -94,6 +94,7 @@
     mounted() {
       this.$store.dispatch("getKeeps", this.user)
       this.$store.dispatch("getUserKeeps", this.user)
+      this.$store.dispatch("authenticate", this.login)
     },
     computed: {
       user() {
