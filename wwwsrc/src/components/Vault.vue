@@ -3,7 +3,7 @@
     <div v-for="vault in userVaults" v-if="vault.userId == user.id" :key="vault.id" class="card text-center">
       <h3 class="card-title">{{vault.id}}. {{vault.name}}</h3>
       <h3 class="card-text">Description: {{vault.description}}</h3>
-      <button class="btn btn-danger" @click="deleteVault(vault)">Delete</button>
+      <button class="btn btn-danger" @click="deleteVault(vault)">Delete Vault</button>
       <div class="container">
 
         <div v-for="keep in keeps" :key="keep.id" class="card text-center">
@@ -31,24 +31,24 @@
                   </button>
                 </div>
                 <form v-on:submit.prevent="updateKeep">
-                            <div class="modal-body">
-                                <div class="container">
-                                    <img :src="viewKeep.img" alt="">
-                                    <h3 class="card-text">Description: {{viewKeep.description}}</h3>
-                                    <h3 class="card-text">Views: {{viewKeep.views}} Saves: {{viewKeep.saves}}</h3>
-                                </div>
-                                <div class="form-group">
-                                    <select v-model="keep.vaultId">
-                                        <option disabled value="">Select a Vault</option>
-                                        <option v-for="vault in userVaults" :key="vault.id" value="vault">{{vault.name}}</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary btn-primary" @click="updateKeep(keep)" data-dismiss="modal">Save</button>
-                            </div>
-                        </form>
+                  <div class="modal-body">
+                    <div class="container">
+                      <img :src="viewKeep.img" alt="">
+                      <h3 class="card-text">Description: {{viewKeep.description}}</h3>
+                      <h3 class="card-text">Views: {{viewKeep.views}} Saves: {{viewKeep.saves}}</h3>
+                    </div>
+                    <div class="form-group">
+                      <select v-model="keep.vaultId">
+                        <option disabled value="">Select a Vault</option>
+                        <option v-for="vault in userVaults" :key="vault.id" value="vault">{{vault.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary btn-primary" @click="updateKeep(keep)" data-dismiss="modal">Save</button>
+                  </div>
+                </form>
               </div>
 
             </div>
@@ -92,7 +92,10 @@
     },
     methods: {
       updateKeep(keep) {
-        console.log(keep)
+        keep.shares++
+        keep.public = this.updatedKeep.public
+        this.$store.dispatch('updateKeep', keep)
+        console.log("Keep updated", keep)
       },
       addView(keep) {
         keep.views++

@@ -94,6 +94,7 @@
         },
         methods: {
             updateKeep(keep) {
+                keep.shares++
                 keep.public = this.updatedKeep.public
                 this.$store.dispatch('updateKeep', keep)
                 console.log("Keep updated", keep)

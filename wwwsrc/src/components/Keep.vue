@@ -8,7 +8,7 @@
                     <img :src="keep.img" alt="">
                     <div class="buttons">
                         <!-- <button class="btn" data-toggle="modal" data-target="#viewingKeepModal" @click="addView(keep)">View</button> -->
-                        <button class="btn" @click="addView(keep)">View</button>
+                        <button class="btn inPic" @click="addView(keep)">View</button>
                         <div v-if="user.id == keep.userId">
                             <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
                         </div>
@@ -90,6 +90,7 @@
         },
         methods: {
             updateKeep(keep) {
+                keep.shares++
                 keep.public = this.updatedKeep.public
                 this.$store.dispatch('updateKeep', keep)
                 console.log("Keep updated", keep)
@@ -112,4 +113,21 @@
 </script>
 
 <style>
+    .container {
+        position: relative;
+        width: 100%;
+    }
+
+    .container .buttons {
+        position: absolute;
+        top: 80%;
+        left: 45%;
+        cursor: pointer;
+        margin: auto;
+        display: none;
+    }
+
+    .container:hover .buttons {
+        display: inline-block;
+    }
 </style>
