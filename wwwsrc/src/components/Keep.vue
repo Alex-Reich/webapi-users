@@ -6,8 +6,9 @@
                 <img :src="keep.img" alt="">
                 <div class="buttons">
                     <button class="btn" data-toggle="modal" data-target="#viewingKeepModal" @click="addView(keep)">View</button>
-                    <button class="btn" @click="addToVault(keep)">Add to Vault </button>
-                    <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
+                    <div v-if="user.id = keep.userId">
+                        <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
+                    </div>
                 </div>
             </div>
             <h3 class="card-text">Description: {{keep.description}}</h3>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="ownerProf">
+        <div class="container">
             <div class="profIcon d-flex">
                 <button class="btn btn-dark mr-auto rnd" data-toggle="modal" data-target="#createKeepModal">Create Keep</button>
                 <button class="btn btn-dark rnd m-auto" data-toggle="modal" data-target="#createVaultModal">Create Vault</button>

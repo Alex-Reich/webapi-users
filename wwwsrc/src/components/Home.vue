@@ -92,34 +92,13 @@
       }
     },
     mounted() {
-      this.$store.dispatch("getKeeps")
+      this.$store.dispatch("getKeeps", this.user)
+      this.$store.dispatch("getUserKeeps", this.user)
     },
     computed: {
       user() {
         return this.$store.state.user
       }
-      // viewingKeeps: {
-      //   get: function () {
-      //     return this.$store.state.viewingKeeps
-      //     return this.$store.state.viewingVaults
-      //   },
-      //   set: function () {
-      //     this.$store.state.viewingKeeps = 1,
-      //     this.$store.state.viewingVaults = 0
-      //     console.log(viewingKeeps)
-      //   }
-      // },
-      // viewingVaults: {
-      //   get: function () {
-      //     return this.$store.state.viewingKeeps
-      //     return this.$store.state.viewingVaults
-      //   },
-      //   set: function () {
-      //     this.$store.state.viewingKeeps = 0,
-      //     this.$store.state.viewingVaults = 1
-      //     console.log(viewingKeeps)
-      //   }
-      // }
     },
     methods: {
       userLogin() {
@@ -129,7 +108,10 @@
         this.$store.dispatch('register', this.register)
       },
       getKeeps() {
-        this.$store.dispatch('getKeeps', this.search)
+        this.$store.dispatch('getKeeps', this.user)
+      },
+      getUserKeeps() {
+        this.$store.dispatch('getUserKeeps', this.user)
       }
     }
   }

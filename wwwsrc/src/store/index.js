@@ -25,7 +25,11 @@ var auth = axios.create({
 
 export default new vuex.Store({
     state: {
-        user: {},
+        user: {
+            username: '',
+            id: '',
+            email: ''
+        },
         keeps: [],
         userKeeps: [],
         userVaults: [],
@@ -34,10 +38,18 @@ export default new vuex.Store({
     },
     mutations: {
         setUser(state, user) {
-            state.user = user
+            state.user = {
+                username: user.username,
+                id: user.id,
+                email: user.email
+            }
         },
         deleteUser(state) {
-            state.user = {}
+            state.user = {
+                username: '',
+                id: '',
+                email: ''
+            }
         },
         setUserVaults(state, vaults) {
             state.userVaults = vaults
@@ -51,8 +63,8 @@ export default new vuex.Store({
         setKeeps(state, keeps) {
             state.keeps = keeps
         },
-        setUserKeeps(state, keeps) {
-            state.userKeeps = keeps
+        setUserKeeps(state, userKeeps) {
+            state.userKeeps = userKeeps
         },
         setNewKeep(state, keep) {
             state.userKeeps.unshift(keep)
@@ -64,15 +76,15 @@ export default new vuex.Store({
             state.userVaults.splice(i, 1)
         },
         deleteKeep(state, keep) {
-            var i = state.keeps.findIndex(k => {
+            var i = state.userKeeps.findIndex(k => {
                 return k.id == keep.id
             })
-            state.keeps.splice(i, 1)
+            state.userKeeps.splice(i, 1)
         },
     },
     actions: {
-        login({ commit }, loginCredentials) {
-            auth.post('account/login', loginCredentials)
+        login({ dispatch, commit }, user) {
+            auth.post('account/login', user)
                 .then(res => {
                     console.log('Successfully logged in')
                     console.log(res.data)
@@ -82,8 +94,8 @@ export default new vuex.Store({
                     console.log("Invalid Credentials")
                 })
         },
-        logout({ commit }) {
-            auth.delete('account/logout')
+        logout({ commit, dispatch, state }) {
+            auth.delete('account/' + state.user.id)
                 .then(res => {
                     commit('deleteUser')
                     router.push({ name: 'Home' })
@@ -109,6 +121,15 @@ export default new vuex.Store({
             api.get("api/keep")
                 .then(res => {
                     commit("setKeeps", res.data)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        },
+        getUserKeeps({ commit, dispatch }, user) {
+            api.get("api/keep/user" + user.id)
+                .then(res => {
+                    commit("setUserKeeps", res.data)
                 })
                 .catch(err => {
                     console.log(err)

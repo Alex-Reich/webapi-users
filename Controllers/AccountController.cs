@@ -51,8 +51,8 @@ namespace API_Users.Controllers
             }
             return null;
         }
-
-        [HttpDelete("logout")]
+        [Authorize]
+        [HttpDelete("{id}")]
         public async Task<string> Logout()
         {
             {

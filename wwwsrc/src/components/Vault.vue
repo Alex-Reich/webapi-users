@@ -65,7 +65,10 @@
         }
       }
     },
-    mounted() { },
+    mounted() {
+      this.$store.dispatch('getUserVaults', this.user)
+
+    },
     computed: {
       user() {
         return this.$store.state.user
