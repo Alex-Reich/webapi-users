@@ -8,8 +8,8 @@
                     <img :src="keep.img" alt="">
                     <div class="buttons">
                         <button class="btn" @click="addView(keep)">View</button>
-                        <div v-if="user.id == keep.userId">
-                            <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
+                        <div v-if="user.id == keep.userId && keep.public == 0">
+                                <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
                         </div>
                     </div>
                 </div>

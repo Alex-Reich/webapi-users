@@ -6,13 +6,13 @@
       <button class="btn btn-danger" @click="deleteVault(vault)">Delete Vault</button>
       <div class="container">
 
-        <div v-for="keep in keeps" :key="keep.id" class="card text-center">
+        <div v-for="keep in keeps" v-if="keep.public == 1":key="keep.id" class="card text-center">
           <h3 class="card-title">{{keep.id}}. {{keep.name}}</h3>
           <div class="container">
             <img :src="keep.img" alt="">
             <div class="buttons">
               <button class="btn" @click="addView(keep)">View</button>
-              <div v-if="user.id == keep.userId">
+              <div v-if="user.id == keep.userId && keep.public == 0">
                 <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
               </div>
             </div>

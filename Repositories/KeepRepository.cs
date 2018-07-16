@@ -25,7 +25,7 @@ namespace API_Users.Repositories
     // GetAll Public Keep
     public IEnumerable<Keep> GetAll()
     {
-      return _db.Query<Keep>("SELECT * FROM keeps WHERE public = 1;");
+      return _db.Query<Keep>("SELECT * FROM keeps ;");
     }
     // GetbyUser
     public IEnumerable<Keep> GetbyUserId(string id)
