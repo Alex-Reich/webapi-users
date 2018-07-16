@@ -45,7 +45,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary btn-primary" @click="updateKeep" data-dismiss="modal">Save</button>
+                                <button class="btn btn-primary btn-primary" @click="updateKeep(keep)" data-dismiss="modal">Save</button>
                             </div>
                         </form>
                     </div>
@@ -62,7 +62,9 @@
         data() {
             return {
                 updatedKeep: {
-                    vaultId: ''
+                    vaultId: '',
+                    public: 0
+                    // add public property, include in updateKeep to switch from public to private
                 },
                 vault: {},
                 viewKeep: {}
@@ -70,6 +72,7 @@
         },
         mounted() {
             this.$store.dispatch('getKeeps')
+            // this.$store.dispatch('getUserVaults', this.user)
         },
         computed: {
             user() {
@@ -86,9 +89,10 @@
             }
         },
         methods: {
-            updateKeep(updatedKeep) {
-                console.log(this.updatedKeep)
-                console.log("Lets update")
+            updateKeep(keep) {
+                keep.public = this.updatedKeep.public
+                this.$store.dispatch('updateKeep', keep)
+                console.log("Keep updated", keep)
             },
             addView(keep) {
                 keep.views++

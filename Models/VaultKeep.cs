@@ -1,4 +1,6 @@
-namespace API_Users
+using System;
+
+namespace API_Users.Models
 {
     public class Name
     {

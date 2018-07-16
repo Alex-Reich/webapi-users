@@ -11,39 +11,46 @@
           <div class="container">
             <img :src="keep.img" alt="">
             <div class="buttons">
-              <button class="btn" data-toggle="modal" data-target="#viewingKeepModal" @click="addView(keep)">View</button>
-              <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
+              <button class="btn" @click="addView(keep)">View</button>
+              <div v-if="user.id == keep.userId">
+                <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
+              </div>
             </div>
           </div>
           <h3 class="card-text">Description: {{keep.description}}</h3>
           <h3 class="card-text">Views: {{keep.views}} Saves: {{keep.saves}}</h3>
 
           <!-- View Keep Modal -->
-          <div class="modal fade" id="viewingKeepModal" tabindex="-1" role="dialog" aria-labelledby="viewingKeepModalTitle" aria-hidden="true">
+          <div class="modal fade" id="viewingAKeepModal" tabindex="-1" role="dialog" aria-labelledby="viewingKeepModalTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title">Keep: {{keep.name}}</h5>
+                  <h5 class="modal-title">Keep: {{viewKeep.name}}</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
-                <div class="modal-body">
-                  <div class="container">
-                    <img :src="keep.img" alt="">
-                    <h3 class="card-text">Description: {{keep.description}}</h3>
-                    <h3 class="card-text">Views: {{keep.views}} Saves: {{keep.saves}}</h3>
-                  </div>
-                  <select v-model="keep.vaultId">
-                    <option disabled value="">Select a Vault</option>
-                    <option v-for="vault in userVaults" :key="vault.id" value="keep.vaultId">{{vault.name}}</option>
-                  </select>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                  <button class="btn btn-primary btn-primary" @click="updateKeep" data-dismiss="modal">Save</button>
-                </div>
+                <form v-on:submit.prevent="updateKeep">
+                            <div class="modal-body">
+                                <div class="container">
+                                    <img :src="viewKeep.img" alt="">
+                                    <h3 class="card-text">Description: {{viewKeep.description}}</h3>
+                                    <h3 class="card-text">Views: {{viewKeep.views}} Saves: {{viewKeep.saves}}</h3>
+                                </div>
+                                <div class="form-group">
+                                    <select v-model="keep.vaultId">
+                                        <option disabled value="">Select a Vault</option>
+                                        <option v-for="vault in userVaults" :key="vault.id" value="vault">{{vault.name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button class="btn btn-primary btn-primary" @click="updateKeep(keep)" data-dismiss="modal">Save</button>
+                            </div>
+                        </form>
               </div>
+
             </div>
           </div>
         </div>
@@ -61,7 +68,8 @@
       return {
         keep: {
           vaultId: ''
-        }
+        },
+        viewKeep: {}
       }
     },
     mounted() {
@@ -89,6 +97,8 @@
       addView(keep) {
         keep.views++
         this.$store.dispatch('updateKeep', keep)
+        this.viewKeep = keep
+        $('#viewingAKeepModal').modal('show')
       },
       deleteVault(vault) {
         this.$store.dispatch("deleteVault", vault)
