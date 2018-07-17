@@ -26,11 +26,17 @@ namespace API_Users.Controllers
             }
             return null;
         }
-        //get vault by user
-        [HttpGet("{userId}")]
-        public IEnumerable<VaultKeep> GetAllByUserId(string userId)
+        //get vaultkeeps by user
+        // [HttpGet("{userId}")]
+        // public IEnumerable<VaultKeep> GetAllByUserId(string userId)
+        // {
+        //     return _db.GetbyUserId(userId);
+        // }
+        // get vaultkeeps by vaultId
+        [HttpGet("{vaultId}")]
+        public IEnumerable<Keep> GetAllByVaultId(int vaultId)
         {
-            return _db.GetbyUserId(userId);
+            return _db.GetbyVaultId(vaultId);
         }
         //edit vault
         [HttpPut("{id}")]

@@ -7,9 +7,9 @@
                 <div class="container">
                     <img :src="keep.img" alt="">
                     <div class="buttons">
-                        <button class="btn inPic" @click="addView(keep)">View</button>
+                        <button class="btn" @click="addView(keep)">View</button>
                         <div v-if="user.id == keep.userId && keep.public == 0">
-                                <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
+                            <button class="btn btn-danger" @click="deleteKeep(keep)">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form v-on:submit.prevent="updateKeep">
+                        <form>
                             <div class="modal-body">
                                 <div class="container">
                                     <img :src="viewKeep.img" alt="">
@@ -38,13 +38,13 @@
                                 <div class="form-group">
                                     <select v-model="vault">
                                         <option disabled value="">Select a Vault</option>
-                                        <option v-for="vault in userVaults" :key="vault.id" value="vault">{{vault.name}}</option>
+                                        <option v-for="vault in userVaults" :key="vault.id" :value="vault">{{vault.name}}</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                                <button class="btn btn-primary btn-primary" @click="updateKeep(keep)" data-dismiss="modal">Save</button>
+                                <button type="button" class="btn btn-primary" @click="createVaultKeep(vault)" data-dismiss="modal">Save</button>
                             </div>
                         </form>
                     </div>
@@ -60,7 +60,7 @@
         name: 'Keep',
         data() {
             return {
-                updatedKeep: {
+                keep: {
                     vaultId: '',
                     public: 0
                     // add public property, include in updateKeep to switch from public to private
@@ -89,10 +89,9 @@
         },
         methods: {
             updateKeep(keep) {
-                keep.shares++
-                keep.public = this.updatedKeep.public
+                keep.saves++
+                console.log(keep)
                 this.$store.dispatch('updateKeep', keep)
-                console.log("Keep updated", keep)
             },
             addView(keep) {
                 keep.views++
@@ -105,6 +104,19 @@
             },
             deleteKeep(keep) {
                 this.$store.dispatch("deleteKeep", keep)
+            },
+            createVaultKeep(vault) {
+                console.log(this.viewKeep)
+                this.viewKeep.saves++
+                var vaultKeep = {
+                    vaultId: vault.id,
+                    keepId: this.viewKeep.id
+                }
+                console.log(vaultKeep)
+
+                this.$store.dispatch('createVaultKeep', vaultKeep)
+                this.$store.dispatch('updateKeep', this.viewKeep)
+
             }
         }
     }

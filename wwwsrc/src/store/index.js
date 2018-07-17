@@ -29,8 +29,8 @@ export default new vuex.Store({
         keeps: [],
         userKeeps: [],
         userVaults: [],
-        activeVault: {}
-
+        activeVault: {},
+        vaultKeeps: []
     },
     mutations: {
         setUser(state, user) {
@@ -73,6 +73,12 @@ export default new vuex.Store({
             })
             state.userKeeps.splice(i, 1)
         },
+        addVaultKeep(state, keeps) {
+            state.vaultKeeps = keeps
+        },
+        setVaultKeeps(state, vaultKeeps) {
+            state.vaultKeeps = vaultKeeps
+        }
     },
     actions: {
         login({ dispatch, commit }, user) {
@@ -126,6 +132,7 @@ export default new vuex.Store({
         getUserKeeps({ commit, dispatch }, user) {
             api.get("api/keep/user" + user.id)
                 .then(res => {
+
                     commit("setUserKeeps", res.data)
                 })
                 .catch(err => {
@@ -142,10 +149,11 @@ export default new vuex.Store({
                 })
         },
         updateKeep({ commit, dispatch }, keep) {
-            console.log(keep)
+            console.log("this keep",keep)
+            debugger
             api.put("api/keep/" + keep.id, keep)
                 .then(res => {
-                    console.log(res.data)
+                    console.log("this keeppppp", res.data)
                     dispatch("getKeeps")
                 })
                 .catch(err => {
@@ -181,7 +189,7 @@ export default new vuex.Store({
 
         },
         deleteKeep({ commit, dispatch }, keep) {
-            api.delete('/keep/' + keep.id)
+            api.delete('api/keep/' + keep.id)
                 .then(res => {
                     commit("deleteKeep", res.data)
                 })
@@ -189,6 +197,24 @@ export default new vuex.Store({
                     console.log(err)
                 })
 
+        },
+        createVaultKeep({commit, dispatch}, vaultKeep) {
+            debugger
+            api.post('api/vaultkeep/', vaultKeep)
+            .then(res => {
+                console.log(res.data)
+                dispatch('getVaultKeeps', res.data)
+            })
+        },
+        getVaultKeeps({commit, dispatch}, vault) {
+            api.get('api/vaultKeep/' + vault.id)
+            .then(res =>{
+                debugger
+                commit('setKeeps', res.data)
+            })
+            .catch(err =>{
+                console.log(err)
+            })
         }
     }
 })  

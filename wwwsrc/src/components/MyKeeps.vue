@@ -37,12 +37,12 @@
                                 </div>
                                 <div class="form-group">
                                     <select v-model="vault">
-                                        <option disabled value="">Select a Vault</option>
+                                        <option disabled selected value="">Select a Vault</option>
                                         <option v-for="vault in userVaults" :key="vault.id" value="vault">{{vault.name}}</option>
                                     </select>
 
                                     <select v-model="updatedKeep.public">
-                                        <option disabled value="">Public or private</option>
+                                        <option disabled selected :value="viewKeep.public">Public or private</option>
                                         <option value="1">Public</option>
                                         <option value="0">Private</option>
                                     </select>
@@ -95,7 +95,7 @@
         methods: {
             updateKeep(viewKeep) {
                 console.log(viewKeep)
-                this.viewKeep.shares++
+                this.viewKeep.saves++
                 viewKeep.public = this.updatedKeep.public
                 this.$store.dispatch('updateKeep', viewKeep)
                 console.log("Keep updated", viewKeep)

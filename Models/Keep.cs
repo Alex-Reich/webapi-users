@@ -16,7 +16,7 @@ namespace API_Users.Models
 
         public Keep()
         {
-           Public = 1; 
+           Public = 0; 
         }
     }
 }
