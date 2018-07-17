@@ -1,14 +1,14 @@
 <template>
   <div class="">
-    <div v-for="vault in userVaults" v-if="vault.userId == user.id" :key="vault.id" class="card text-center">
+    <div v-for="vault in userVaults" v-if="vault.userId == user.id" :key="vault.id" class="card text-center container outline">
       <div @click="setActiveVault(vault)">
-        <h3 class="card-title">{{vault.id}}. {{vault.name}}</h3>
+        <h3 class="card-title">Vault Name: {{vault.name}}</h3>
         <h3 class="card-text">Description: {{vault.description}}</h3>
+        <button class="btn btn-danger" @click="deleteVault(vault)">Delete Vault</button>
         <div v-if="activeVault == vault">
-          draw the vaultKeeps
 
-          <div v-for="keep in keeps" v-if="keep.public == 1 " :key="keep.id" class="card text-center">
-            <h3 class="card-title">{{keep.id}}. {{keep.name}}</h3>
+          <div v-for="keep in keeps" v-if="keep.public == 1 " :key="keep.id" class="card text-center bg">
+            <h3 class="card-title">Keep Name: {{keep.name}}</h3>
             <div class="container">
               <img :src="keep.img" alt="">
               <div class="buttons">
@@ -22,7 +22,6 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-danger" @click="deleteVault(vault)">Delete Vault</button>
         <div class="container">
 
 
@@ -82,8 +81,6 @@
     },
     mounted() {
       this.$store.dispatch('getUserVaults', this.user)
-      //this.$store.dispatch('getVaultKeeps', activeVault.id)
-      console.log(this.user)
     },
     computed: {
       user() {
@@ -120,7 +117,6 @@
       },
       setActiveVault(vault) {
         this.activeVault = vault;
-        debugger
         this.$store.dispatch("getVaultKeeps", this.activeVault);
       }
     }

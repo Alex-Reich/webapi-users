@@ -1,9 +1,9 @@
-<template>
-    <div class="container">
+<template class>
+    <div class="container ">
         <div>
 
-            <div v-for="keep in keeps" v-if="keep.public == 1" :key="keep.id" class="card text-center">
-                <h3 class="card-title">{{keep.id}}. {{keep.name}}</h3>
+            <div v-for="keep in keeps" v-if="keep.public == 1" :key="keep.id" class="card text-center outline">
+                <h3 class="card-title">Keep Name: {{keep.name}}</h3>
                 <div class="container">
                     <img :src="keep.img" alt="">
                     <div class="buttons">
@@ -140,5 +140,12 @@
 
     .container:hover .buttons {
         display: inline-block;
+    }
+    .outline {
+        border: 2px solid grey;
+        background-color: lightgrey;
+    }
+    .bg {
+        background-color: darkgrey; 
     }
 </style>

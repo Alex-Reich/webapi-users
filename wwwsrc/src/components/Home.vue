@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home bg">
     <h1>Welcome to Keepr</h1>
     <div v-if="!user.id">
       <button type="button" class="btn btn1 mt-1 btnwidth2 mr-4" data-toggle="modal" data-target="#loginModal">Login</button>

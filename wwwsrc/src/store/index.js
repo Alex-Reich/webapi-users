@@ -150,7 +150,6 @@ export default new vuex.Store({
         },
         updateKeep({ commit, dispatch }, keep) {
             console.log("this keep",keep)
-            debugger
             api.put("api/keep/" + keep.id, keep)
                 .then(res => {
                     console.log("this keeppppp", res.data)
@@ -199,7 +198,6 @@ export default new vuex.Store({
 
         },
         createVaultKeep({commit, dispatch}, vaultKeep) {
-            debugger
             api.post('api/vaultkeep/', vaultKeep)
             .then(res => {
                 console.log(res.data)
@@ -209,7 +207,6 @@ export default new vuex.Store({
         getVaultKeeps({commit, dispatch}, vault) {
             api.get('api/vaultKeep/' + vault.id)
             .then(res =>{
-                debugger
                 commit('setKeeps', res.data)
             })
             .catch(err =>{
