@@ -152,7 +152,6 @@ export default new vuex.Store({
             console.log("this keep",keep)
             api.put("api/keep/" + keep.id, keep)
                 .then(res => {
-                    console.log("this keeppppp", res.data)
                     dispatch("getKeeps")
                 })
                 .catch(err => {
